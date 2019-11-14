@@ -1,31 +1,13 @@
 .model tiny
 .data
-    first dw 0002h, 0000h
-    second dw 0009h, 0000h
+    first dw 0001h, 1234h
+    second dw 0002h, 1000h
     result dw 2 dup(?)
     temp dw 0     
-    flag db 0
 .code
 .startup 
     mov cx, 2
     mov si, 0     
-    mov ax, first[2] 
-    mov bx, second[2]
-    cmp bx, ax
-    clc
-    jb op
-    cmp bx, ax
-    je eq
-    mov flag, 1
-    jmp op
-    eq:   
-        mov ax, first[0]
-        mov bx, second[0]
-        cmp bx, ax
-        jbe op1
-        mov flag, 1  
-    op1:
-        clc
     op:
         mov ax, first[si]
         sbb ax, second[si]
@@ -34,11 +16,6 @@
         inc si
         loop op
     mov cx, 2  
-    cmp flag, 0
-    je print
-    mov dx, '-'
-    mov ah, 02h
-    int 21h
     print: 
         dec si
         dec si
