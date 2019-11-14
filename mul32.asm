@@ -4,7 +4,7 @@
     second dw 0ffffh, 0ffffh
     result dw 4 dup(0)
     msg db "Result: $"
-    temp dw ?
+    temp dw 0
 
 .code
 .startup
@@ -38,6 +38,7 @@
     
     mov si, 6h
     mov cx, 4h
+    mov dx, 0h
     print: 
         mov bx, result[si]
         mov temp, cx
